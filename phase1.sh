@@ -52,7 +52,7 @@ sleep 0.1s
 
 #3. enable ipv4 forwarding
 echo ">> Enabling ipv4 forwarding in /etc/sysctl.conf"
-sudo cp /etc/sysctl.conf /etc/sysctl_backup.conf
+sudo cp /etc/sysctl.conf /etc/sysctl_backup.conf 
 sudo sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
 
 #4. Set swap file to 0Mb

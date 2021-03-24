@@ -16,7 +16,7 @@ echo " Once reconnected after the reboot, execute phase2.sh to continue with the
 echo " "
 echo " "
 echo "This script will start in 20 seconds, if you do not wish to run it cancel the execution using ctrl+C"
-sleep 20s
+sleep 2s
 clear
 sleep 0.5s
 
@@ -48,12 +48,7 @@ sleep 2s
 clear
 sleep 0.1s
 
-## 2. Modifiying /etc/hostname and /etc/hosts
-echo ">> Setting up hosts and hostname files to $NODENAME ..."
-sudo sed -i "s/raspberrypi/$NODENAME/g" /etc/hostname
-sudo sed -i "s/raspberrypi/$NODENAME/g" /etc/hosts
-sleep 0.5s
-echo ">> Done - host and hostname have both been set to $NODENAME."
+
 
 #3. enable ipv4 forwarding
 echo ">> Enabling ipv4 forwarding in /etc/sysctl.conf"
@@ -71,6 +66,13 @@ echo Adding " cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory" to /boo
 sudo cp /boot/cmdline.txt /boot/cmdline_backup.txt
 orig="$(head -n1 /boot/cmdline.txt) cgroup_enable=cpuset cgroup_memory=1 cgroup_enable=memory"
 echo $orig | sudo tee /boot/cmdline.txt
+
+## 2. Modifiying /etc/hostname and /etc/hosts
+echo ">> Setting up hosts and hostname files to $NODENAME ..."
+sudo sed -i "s/raspberrypi/$NODENAME/g" /etc/hostname
+sudo sed -i "s/raspberrypi/$NODENAME/g" /etc/hosts
+sleep 0.5s
+echo ">> Done - host and hostname have both been set to $NODENAME."
 
 echo " "
 echo " "
